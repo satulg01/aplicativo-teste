@@ -16,5 +16,8 @@ Requires PHP 7.4
  - Create .env file
     - cp .env.example .env [Linux]
     - copy .env.example .env [Windows]
+
+ - Create database and import sql file
+
 # serve at localhost:80
     $ cd path/to/your/app php -S 127.0.0.1:80
