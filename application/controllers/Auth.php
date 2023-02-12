@@ -4,7 +4,6 @@ date_default_timezone_set('America/Sao_Paulo');
 
 class Auth extends CI_Controller
 {
-
     public function index()
     {
         $this->load->view("auth/index", '');
@@ -23,12 +22,24 @@ class Auth extends CI_Controller
 
         $campos = $this->input->post();
 
+        if(!isset($campos["cpf"]) || $campos["cpf"] == "") {
+            return $this->output->set_content_type("json")->set_status_header(403)->set_output(json_encode(['mensagem' => 'O campo "cpf" é necessário!', 'status' => '403']));
+        }
+        if(!isset($campos["senha"]) || $campos["senha"] == "") {
+            return $this->output->set_content_type("json")->set_status_header(404)->set_output(json_encode(['mensagem' => 'O campo "senha" é necessário!', 'status' => '404']));
+        }
+        
+
         $pass = sha1($campos["senha"] . $_ENV['SECRET_KEY']);
 
         $resultado = $this->user->login(addslashes($campos["cpf"]), $pass);
 
         if (isset($resultado[0])) {
             $user = $resultado[0];
+
+            if($user["status"] != 1) {
+                return $this->output->set_content_type("json")->set_status_header(404)->set_output(json_encode(['mensagem' => 'Seu acesso está inativo!', 'status' => '404']));
+            }
 
             $dados = array(
                 "userId" => $user["id"],

@@ -61,6 +61,13 @@
 <script>
     window.onload = () => {
         $("#status").val(<?php echo $product["status"]; ?>);
+
+        <?php if ($product["status"] != 1) : ?>
+
+        $("input, textarea").attr("readonly", true);
+        $("select").attr("disabled", true);
+
+        <?php endif ?>
     }
 
     $("#salvar").click(function() {

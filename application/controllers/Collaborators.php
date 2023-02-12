@@ -13,10 +13,18 @@ class Collaborators extends CI_Controller
 		parent::__construct();
 		verifyPermission();
 
-		//Carrego a model de colaboradores
+		$user = getLoggedUser();
+		$this->data["user"] = $user;
+
+		if($user["access"] == "V") {
+            $this->session->set_flashdata("danger", "Você não tem permissão para acessar!");
+			redirect("/");
+		}
+
 		$this->load->model("collaborator");
 		$this->load->model("user");
 	}
+
 	public function index()
 	{
 
@@ -34,7 +42,7 @@ class Collaborators extends CI_Controller
 	public function add()
 	{
 
-		$page = $this->load->view("collaborators/add", '', TRUE);
+		$page = $this->load->view("collaborators/add", $this->data, TRUE);
 
 		$this->output->set_content_type("html")->set_status_header(200)->set_output($page);
 	}
@@ -73,6 +81,10 @@ class Collaborators extends CI_Controller
 
 			$pedacosNome = explode(" ", $collaborator["name"]);
 			$usuario = $pedacosNome[0];
+			
+			if($collaborator["type"] == 2) {
+				$collaborator["status"] = 0;
+			}
 
 			$user = array(
 				"name" => $collaborator["name"],
@@ -129,6 +141,12 @@ class Collaborators extends CI_Controller
 			$usuario = $pedacosNome[0];
 			
 			$userActual = $this->user->getByCollaborator($this->input->input_stream("id"));
+
+
+			if($collaborator["type"] == 2) {
+				$collaborator["status"] = 0;
+			}
+
 			if(isset($userActual[0])) {
 				$userActual = $userActual[0];
 
@@ -162,6 +180,14 @@ class Collaborators extends CI_Controller
 			$collaborator = ["id" => $this->input->input_stream("id"), "status" => 1];
 
 			$this->collaborator->update($collaborator);
+
+			$userActual = $this->user->getByCollaborator($this->input->input_stream("id"));
+			
+			if(isset($userActual[0])) {
+				$userActual = $userActual[0];
+
+				$this->user->update(["id" => $userActual["id"], "status" => 1]);
+			}
 
 			return $this->output->set_content_type("json")->set_status_header(200)->set_output(json_encode(['mensagem' => 'Colaborador reativado com sucesso!', 'status' => '200']));
 		} catch (\Throwable $th) {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12-Fev-2023 às 14:02
+-- Tempo de geração: 13-Fev-2023 às 00:56
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.4.1
 
@@ -43,6 +43,7 @@ CREATE TABLE `blocked_ips` (
 
 CREATE TABLE `collaborators` (
   `id` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
   `name` varchar(150) NOT NULL,
   `document` varchar(14) NOT NULL,
   `zip_code` varchar(10) NOT NULL,
@@ -69,6 +70,36 @@ CREATE TABLE `login_attemps` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `supplier_id` int(11) NOT NULL,
+  `date_sale` datetime NOT NULL DEFAULT current_timestamp(),
+  `observation` text NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `orders_items`
+--
+
+CREATE TABLE `orders_items` (
+  `id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `quantity` decimal(10,2) NOT NULL,
+  `value` decimal(10,2) NOT NULL,
+  `value_final` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `products`
 --
 
@@ -79,29 +110,6 @@ CREATE TABLE `products` (
   `brand` varchar(100) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `products`
---
-
-INSERT INTO `products` (`id`, `name`, `description`, `brand`, `status`) VALUES
-(1, 'Batata doce doce como mel\'', 'Bem gostosa', 'Yoki', 1),
-(2, 'Arroz com feijão \'', 'Arroz com feijão \'gostoso e grande', 'Namoradoss', 1),
-(3, '', '', '', 1);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `recebimentos`
---
-
-CREATE TABLE `recebimentos` (
-  `id` int(11) NOT NULL,
-  `valor` decimal(10,2) NOT NULL,
-  `identificador` varchar(100) COLLATE utf8_bin NOT NULL,
-  `data` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `status` int(3) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -120,13 +128,6 @@ CREATE TABLE `users` (
   `token` varchar(200) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `users`
---
-
-INSERT INTO `users` (`id`, `name`, `id_collaborator`, `user`, `document`, `pass`, `access`, `token`, `status`) VALUES
-(1, 'Roger', 0, 'roger', '999.999.999-99', 'ac7ac098c005624121c2c94a4e5fb52124a8ddd8', 'A', '', 1);
 
 --
 -- Índices para tabelas despejadas
@@ -151,15 +152,21 @@ ALTER TABLE `login_attemps`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `products`
+-- Índices para tabela `orders`
 --
-ALTER TABLE `products`
+ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `recebimentos`
+-- Índices para tabela `orders_items`
 --
-ALTER TABLE `recebimentos`
+ALTER TABLE `orders_items`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `products`
+--
+ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -191,22 +198,28 @@ ALTER TABLE `login_attemps`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `orders_items`
+--
+ALTER TABLE `orders_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de tabela `recebimentos`
---
-ALTER TABLE `recebimentos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

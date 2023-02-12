@@ -38,6 +38,9 @@ div.modal-glass {
 	border-left: 8px solid #3490dd;
 }
 
+.alert .fas {
+	float: left;
+}
 /* TEXTO DO AVISO */
 .alert .msg {
 	padding: 0 20px;

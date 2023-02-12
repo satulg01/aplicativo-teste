@@ -1,5 +1,15 @@
+
+function chargeTooltip() {
+	const toolTipItems = document.querySelectorAll('[tooltip]')
+	const tooltipList = [...toolTipItems].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+}
+
 $(document).ready(function() {
 	$('[format="money"]').mask("#.##0,00", {
+		reverse: true
+	});
+
+	$('[format="decimal"]').mask("#.##0,00", {
 		reverse: true
 	});
 
@@ -89,6 +99,40 @@ function getSqlDate(date) {
 
 	return dateObject.toISOString().slice(0, 19).replace("T", " ");
 }
+
+function toFloat(num) {
+	if(num == "") {
+		return 0;
+	}
+
+    dotPos = num.indexOf('.');
+    commaPos = num.indexOf(',');
+
+    if (dotPos < 0)
+        dotPos = 0;
+
+    if (commaPos < 0)
+        commaPos = 0;
+
+    if ((dotPos > commaPos) && dotPos)
+        sep = dotPos;
+    else {
+        if ((commaPos > dotPos) && commaPos)
+            sep = commaPos;
+        else
+            sep = false;
+    }
+
+    if (sep == false)
+        return parseFloat(num.replace(/[^\d]/g, ""));
+
+    return parseFloat(
+        num.substr(0, sep).replace(/[^\d]/g, "") + '.' + 
+        num.substr(sep+1, num.length).replace(/[^0-9]/, "")
+    );
+
+}
+
 
 function getDinheiroByElement(elemento) {
 	let num = elemento.val();

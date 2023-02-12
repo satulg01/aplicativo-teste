@@ -16,14 +16,28 @@ if(!function_exists('verifyPermission')){
         $ci = get_instance();
 
         $loggedUser = $ci->session->userdata("logged_user");
+		$ci->load->model("user");
+		$userLoggedFromDB = $ci->user->getWhere(["id", $loggedUser["id"]])[0];
 
         if(!$loggedUser) {
             $ci->session->set_flashdata("danger", "Você precisa estar logado!");
             redirect("login");
-        } else if($loggedUser["status"] != 1) {
+        } else if($userLoggedFromDB["status"] != 1) {
             $ci->session->set_flashdata("danger", "Seu acesso está inativo!");
             redirect("login");
         }
+    }
+}
+
+if(!function_exists('getLoggedUser')){
+    function getLoggedUser(){
+        $ci = get_instance();
+		$ci->load->model("user");
+
+        $loggedUser = $ci->session->userdata("logged_user");
+		$userLoggedFromDB = $ci->user->getWhere(["id", $loggedUser["id"]])[0];
+
+        return $userLoggedFromDB;
     }
 }
 

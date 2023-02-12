@@ -23,10 +23,20 @@
     <h1>Editar colaborador</h1>
 
     <form action="" id="form-edt">
+        
         <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>
             <input type="text" class="form-control" id="nome" name="name" value="<?php echo $collaborator["name"]; ?>" />
         </div>
+        
+        <div class="mb-3">
+            <label for="tipo" class="form-label">Tipo</label>
+            <select name="type" id="tipo" class="form-control">
+                <option value="1">Usuário</option>
+                <option value="2">Fornecedor</option>
+            </select>
+        </div>
+
 
         <div class="mb-3">
             <label for="cpf" class="form-label">CPF</label>
@@ -50,7 +60,10 @@
 
         <div class="mb-3">
             <label for="acesso" class="form-label">Acesso</label>
-            <input type="text" class="form-control" id="acesso" name="access" value="<?php echo $collaborator["access"] ?>">
+            <select class="form-control" id="acesso" name="access">
+                <option value="A">Admin</option>
+                <option value="V">Vendedor</option>
+            </select>
         </div>
 
         <div class="mb-3">
@@ -76,6 +89,15 @@
 <script>
     window.onload = () => {
         $("#status").val(<?php echo $collaborator["status"]; ?>);
+        $("#tipo").val(<?php echo $collaborator["type"]; ?>);
+        $("#acesso").val('<?php echo $collaborator["access"]; ?>');
+
+        <?php if ($collaborator["status"] != 1) : ?>
+
+        $("input, textarea").attr("readonly", true);
+        $("select").attr("disabled", true);
+
+        <?php endif ?>
     }
 
     $("#salvar").click(function() {

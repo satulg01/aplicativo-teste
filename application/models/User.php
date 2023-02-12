@@ -3,14 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends CI_Model {
 
-	public function get($id)
+	public function get()
 	{
 		return $this->db->query("SELECT `users`.* FROM `users`")->result_array();
 	}
 
-	public function getWhere($orderBy = [])
+	public function getWhere($where = [])
 	{
-		$query = $this->db->query("SELECT `users`.* FROM `users` WHERE `$orderBy[0]` = '$orderBy[1]'");
+		$query = $this->db->query("SELECT `users`.* FROM `users` WHERE `$where[0]` = '$where[1]'");
 		return $query->result_array();
 	}
 

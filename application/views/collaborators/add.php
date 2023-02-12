@@ -23,6 +23,14 @@
         </div>
 
         <div class="mb-3">
+            <label for="tipo" class="form-label">Tipo</label>
+            <select name="type" id="type" class="form-control">
+                <option value="1">Usuário</option>
+                <option value="2">Fornecedor</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
             <label for="cpf" class="form-label">CPF</label>
             <input type="text" class="form-control" id="cpf" format="cpf" name="document">
         </div>
@@ -44,7 +52,10 @@
 
         <div class="mb-3">
             <label for="acesso" class="form-label">Acesso</label>
-            <input type="text" class="form-control" id="acesso" name="access">
+            <select class="form-control" id="acesso" name="access">
+                <option value="A">Admin</option>
+                <option value="V">Vendedor</option>
+            </select>
         </div>
 
         <div class="mb-3">

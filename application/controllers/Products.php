@@ -12,6 +12,14 @@ class Products extends CI_Controller
 	{
 		parent::__construct();
 		verifyPermission();
+
+		$user = getLoggedUser();
+		$this->data["user"] = $user;
+		
+		if($user["access"] == "V") {
+            $this->session->set_flashdata("danger", "Você não tem permissão para acessar!");
+			redirect("/");
+		}
 	}
 	
 
@@ -34,7 +42,7 @@ class Products extends CI_Controller
 	public function add()
 	{
 
-		$page = $this->load->view("products/add", '', TRUE);
+		$page = $this->load->view("products/add", $this->data, TRUE);
 
 		$this->output->set_content_type("html")->set_status_header(200)->set_output($page);
 	}

@@ -25,8 +25,7 @@
 </div>
 </body>
 <script>
-    const toolTipItems = document.querySelectorAll('[tooltip]')
-    const tooltipList = [...toolTipItems].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    chargeTooltip();
 
     const TIME_UPDATE = 700;
 </script>

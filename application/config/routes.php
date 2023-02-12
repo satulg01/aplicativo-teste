@@ -1,20 +1,23 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$route['teste']["GET"] = 'Auth/verifyBlock';
+//$route['teste']["GET"] = 'Auth/verifyBlock';
+
+$route["default_controller"] = "Main";
 
 #Login
 $route['logout']["GET"] = 'Auth/logout';
 $route['login']["GET"] = 'Auth/index';
 $route['login']["POST"] = 'Auth/login';
 
+#PEDIDOS
+$route['pedidos']["GET"] = 'Orders/index';
+$route['pedidos/add']["GET"] = 'Orders/add';
+$route['pedidos/add']["POST"] = 'Orders/insert';
+$route['pedidos/(.+)/editar']["GET"] = 'Orders/edit/$1';
+$route['pedidos/editar']["PUT"] = 'Orders/update';
 
-#RECEBIMENTOS
-$route['recebimentos/pay']["PUT"] = 'Recebimentos/pay';
-$route['recebimentos/unpay']["PUT"] = 'Recebimentos/unpay';
-$route['recebimentos']["PUT"] = 'Recebimentos/update';
-$route['recebimentos']["DELETE"] = 'Recebimentos/delete';
-$route['recebimentos/add']["POST"] = 'Recebimentos/insert';
+$route['pedidos_finalizados']["GET"] = 'Orders/finalized/$1';
 
 
 #COLABORADORES
@@ -24,6 +27,7 @@ $route['colaboradores/add']["POST"] = 'Collaborators/insert';
 $route['colaboradores/(.+)/editar']["GET"] = 'Collaborators/edit/$1';
 $route['colaboradores/editar']["PUT"] = 'Collaborators/update';
 $route['colaboradores/reativar']["PUT"] = 'Collaborators/reactivate';
+
 
 #PRODUTOS
 $route['produtos']["GET"] = 'Products/index';
