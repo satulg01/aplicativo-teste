@@ -38,6 +38,8 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
+
 /**
  * URI Class
  *
@@ -50,6 +52,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link		https://codeigniter.com/userguide3/libraries/uri.html
  */
 class CI_URI {
+
+	/**
+	 * CI Config
+	 *
+	 * @var CI_Config
+	 */
+	public $config;
 
 	/**
 	 * List of cached URI segments
