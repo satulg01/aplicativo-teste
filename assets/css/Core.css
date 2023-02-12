@@ -1,0 +1,222 @@
+/* ALERTAS */
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+div.modal-glass {
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	background: black;
+	position: absolute;
+}
+/* ALERTA */
+.alert {
+	user-select: none;
+	z-index: 10001;
+	padding: 20px 40px;
+	min-width: 420px;
+	position: fixed;
+	right: 0;
+	top: 10px;
+	border-radius: 4px;
+	overflow: hidden;
+	opacity: 0;
+	pointer-events: none;
+}
+.alert.aviso {
+	background: #ffdb9b;
+	border-left: 8px solid #ffa502;
+}
+.alert.sucesso {
+	background: #d1e6dd;
+	border-left: 8px solid #00a342;
+}
+.alert.erro {
+	background: #ffcdd2;
+	border-left: 8px solid #ee534f;
+}
+.alert.info {
+	background: #cfe2ff;
+	border-left: 8px solid #3490dd;
+}
+
+/* TEXTO DO AVISO */
+.alert .msg {
+	padding: 0 20px;
+	font-size: 16px;
+}
+
+.alert.aviso .msg {
+	color: #ce8500;
+}
+.alert.sucesso .msg {
+	color: #4c755e;
+}
+.alert.erro .msg {
+	color: #ae7577;
+}
+.alert.info .msg {
+	color: #295187;
+}
+
+/* BOTÃO DE FECHAR */
+.alert .close-btn {
+	position: absolute;
+	right: 0px;
+	top: 50%;
+	transform: translateY(-50%);
+	padding: 20px 18px;
+	cursor: pointer;
+}
+.alert.aviso .close-btn {
+	background: #ffd080;
+}
+.alert.sucesso .close-btn {
+	background: #b0d6c6;
+}
+.alert.erro .close-btn {
+	background: #f2aeb3;
+}
+.alert.info .close-btn {
+	background: #bad1f5;
+}
+
+/* HOVER DO BOTÃO DE FECHAR */
+.alert.aviso .close-btn:hover {
+	background: #ffc766;
+}
+.alert.sucesso .close-btn:hover {
+	background: #8fc9b1;
+}
+.alert.erro .close-btn:hover {
+	background: #e69ca1;
+}
+.alert.info .close-btn:hover {
+	background: #9ab7e6;
+}
+
+/* ICONE DO BOTÃO DE FECHAR */
+.alert .close-btn .fas {
+	font-size: 22px;
+	line-height: 40px;
+	cursor: pointer;
+	font: 1.3rem "Fasolid";
+}
+.alert .close-btn .fas:before {
+	content: "\f057";
+}
+.alert.aviso .close-btn .fas {
+	color: #ce8500;
+}
+.alert.sucesso .close-btn .fas {
+	color: #18ad56;
+}
+.alert.erro .close-btn .fas {
+	color: #e57373;
+}
+.alert.info .close-btn .fas {
+	color: #6592db;
+}
+
+/* ICONE DO AVISO */
+.alert.aviso .fas.icon {
+	position: absolute;
+	left: 0px;
+	top: 50%;
+	transform: translateY(-50%);
+	padding: 20px 18px;
+	cursor: pointer;
+}
+.alert.aviso .fas.icon::before {
+	color: #ce8500;
+	font: 1.3rem "Fasolid";
+	content: "\f06a";
+}
+.alert.sucesso .fas.icon::before {
+	color: #18ad56;
+	font: 1.3rem "Fasolid";
+	content: "\f00c";
+}
+.alert.erro .fas.icon::before {
+	color: #e57373;
+	font: 1.3rem "Fasolid";
+	content: "\f071";
+}
+.alert.info .fas.icon::before {
+	color: #6592db;
+	font: 1.3rem "Fasolid";
+	content: "\f05a";
+}
+.alert span.icon {
+	font-size: 12pt;
+}
+.alert.showAlert {
+	opacity: 1;
+	pointer-events: auto;
+}
+.alert.show {
+	animation: show_slide 1s ease forwards;
+}
+@keyframes show_slide {
+	0% {
+		transform: translateX(100%);
+	}
+	40% {
+		transform: translateX(-10%);
+	}
+	80% {
+		transform: translateX(0%);
+	}
+	100% {
+		transform: translateX(-10px);
+	}
+}
+/* /ALERTAS */
+
+/* MODAL */
+div.modal-glass {
+	position: fixed;
+	z-index: 10000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+div.modal-glass .spinner {
+	width: 80px;
+	position: fixed;
+	top: calc(50% - 80px);
+	left: calc(50% - 80px);
+}
+div.modal-glass .modal-content {
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%; /* Could be more or less, depending on screen size */
+}
+/* /MODAL */
+
+
+/* BOTOES */
+table.table button {
+	width: 35px;
+	height: 35px;
+}
+button.btn.edit-action::before {
+	font: 0.8rem "Fasolid";
+	content: '\f303';
+	line-height: 35px;
+}
+button.btn.del-action::before {
+	font: 0.8rem "Fasolid";
+	content: '\f1f8';
+}
+button.btn.pay-action::before {
+	font: 0.8rem "Fasolid";
+	content: '\24';
+}
+/* /BOTOES */
+
+
+

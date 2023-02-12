@@ -1,0 +1,23 @@
+-> Ver o vídeo fixado sobre deploy automatico om github:
+    - Aprender mais sobre GitHub;
+    
+
+
+-> Implementar o sistema de login:
+
+    - https://www.youtube.com/watch?v=cU-cmfmbL2k
+
+    - Para toda requisição, enviar o token para o Back
+        - Resolvido, envio por meio da classe AJAX
+        - o TOKEN é armazenado na localStorage do usuário
+
+    - Quando o usuário logar, criar um token com o JWT com validade
+        - Quase resolvido, está no AuthController
+    
+    - Para essas requisições, passar por um controllador central que verifica se exige autenticação ou não para essa requisição. Se caso exigir, fazer toda a verificação.
+
+
+-> Criar o menu principal do sistema.
+-> Criar a parte que registra os tipos de contas
+-> Criar a parte que registra as pessoas
+-> Criar a parte que registra os tipos de pagamentos

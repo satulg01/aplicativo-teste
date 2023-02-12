@@ -1,0 +1,31 @@
+span.status {
+    min-width: 110px;
+    height: 25px;
+    font: 10pt RobotoBold;
+    display: inline-block;
+    border-radius: 15px;
+    line-height: 25px;
+    text-transform: uppercase;
+}
+
+
+
+
+
+span.status.status-recebimento-1 {
+    background: #ddd;
+    color: black;
+    border: 1px solid #ccc;
+}
+span.status.status-recebimento-1::before {
+    content: 'Lançado';
+}
+
+span.status.status-recebimento-2 {
+    background: rgb(4, 163, 15);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(4, 131, 12);
+}
+span.status.status-recebimento-2::before {
+    content: 'Pago';
+}
