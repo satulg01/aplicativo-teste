@@ -5,9 +5,9 @@ Requires PHP 7.4
 
 # Build Setup
 
-# enable php.ini extensions:
+- enable php.ini extensions:
 
- - extension=mysqli
+ -- extension=mysqli
 
 
 # install dependencies
