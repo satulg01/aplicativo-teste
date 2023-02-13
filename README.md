@@ -40,10 +40,10 @@ Requires PHP 7.4
 
    Insomina Collection: Insomnia-aplicativo-teste.json file in project root
 
-# Funções do sistema
-   - Colaboradores inseridos como fornecedor não tem acesso ao sistema.
-   - Colaboradores inseridos como usuário mas com acesso de vendedor somente acessa a área de pedidos e apenas visualiza e adiciona, não edita.
+# System functions
+   - Collaborators entered as a supplier don't have access to the system.
+   - Collaborators entered as a user but with seller access only access the order area and only view and add, not edit..
 
    - If you put wrong password 3 times, will be blocked for 10 minutes. This time not reset, just later the time .
 			
-			- New collaborators come with the default password '123'
+   - New collaborators come with the default password '123'
