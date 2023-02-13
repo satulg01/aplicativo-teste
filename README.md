@@ -44,4 +44,6 @@ Requires PHP 7.4
    - Colaboradores inseridos como fornecedor não tem acesso ao sistema.
    - Colaboradores inseridos como usuário mas com acesso de vendedor somente acessa a área de pedidos e apenas visualiza e adiciona, não edita.
 
-   - Se caso errar a senha 3 vezes, tomará block de 10min. Esse tempo não é zerado.
+   - If you put wrong password 3 times, will be blocked for 10 minutes. This time not reset, just later the time .
+			
+			- New collaborators come with the default password '123'
