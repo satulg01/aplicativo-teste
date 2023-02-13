@@ -19,7 +19,7 @@ Requires PHP 7.4
     - cp .env.example .env [Linux]
     - copy .env.example .env [Windows]
 
- - Create database and import sql file in project root
+ - Create database and import sql file on project root
 
  - Config database infos in .env 
 
