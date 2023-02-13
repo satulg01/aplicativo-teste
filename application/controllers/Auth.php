@@ -16,8 +16,6 @@ class Auth extends CI_Controller
             return $this->output->set_content_type("json")->set_status_header(401)->set_output(json_encode(['mensagem' => 'Número máximo de tentativas excedidas!', 'status' => '401']));
         }
 
-        $this->verifyDdos();
-
         $this->load->model("user");
 
         $campos = $this->input->post();
@@ -61,6 +59,7 @@ class Auth extends CI_Controller
             );
 
             $this->blocked->insert_login_attemp($dados);
+            $this->verifyDdos();
 
             return $this->output->set_content_type("json")->set_status_header(404)->set_output(json_encode(['mensagem' => 'Usuário e senha não conferem!', 'status' => '404']));
         }
@@ -95,7 +94,7 @@ class Auth extends CI_Controller
 
         $tentativas = $this->blocked->get_ip_attemps($this->getClientIp());
         
-        if(count($tentativas) >= 2) {
+        if(count($tentativas) >= 3) {
             $this->blocked->insert_blocked_ip($this->getClientIp());
         }
     }
