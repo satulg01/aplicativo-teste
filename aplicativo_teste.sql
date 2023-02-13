@@ -129,6 +129,8 @@ CREATE TABLE `users` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO `users` (`id`, `name`, `id_collaborator`, `user`, `document`, `pass`, `access`, `token`, `status`) VALUES ('0', 'Teste', '0', 'admin', '999.999.999-99', '2534f8a88242807abc33fbb6fa0ca96dea562b0a', 'A', '', '1');
+
 --
 -- Índices para tabelas despejadas
 --

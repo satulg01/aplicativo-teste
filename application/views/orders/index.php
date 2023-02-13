@@ -1,4 +1,3 @@
-<?php $this->load->view('components/html/header'); ?>
 
 <style>
     span.status-pedido-1 {
@@ -52,7 +51,6 @@
                 <th width="200">#
                 <th width="200">Data
                 <th>Fornecedor
-                <th width="200">Produtos
                 <th width="160" style="text-align:center;">Status
                 <th width="160" style="text-align:center;">Ação
         </thead>
@@ -71,7 +69,6 @@
                 <td><?php echo $order["id"]; ?>
                 <td><?php echo date("d/m/Y", strtotime($order["date_sale"])); ?>
                 <td><?php echo $collaborators[$order["supplier_id"]]["name"]; ?>
-                <td><?php echo 1; ?>
                 <td align="center" valign="middle"><span class="status status-pedido-<?php echo $order["status"]; ?>"></span>
                 <td>
 
