@@ -97,7 +97,7 @@
                             <td>
                                 <?php if ($order["status"] == 1 && $user["access"] == "A") : ?>
 
-                                <button type="button" tooltip="true" data-bs-title="Excluir item" class="btn p-0 btn-danger del-action"></button>
+                                <button type="button" class="btn p-0 btn-danger del-action produtos-excluir"></button>
 
                                 <?php endif ?>
                     <?php endforeach ?>
@@ -215,7 +215,7 @@
                 <td><input class="form-control bg-secondary text-light produtos-quantidade" type="text" format="decimal"/>
                 <td><input class="form-control bg-secondary text-light produtos-valor" type="text" format="money" value="0,00"/>
                 <td><input class="form-control bg-secondary text-light produtos-valor-total" type="text" format="money" readonly/>
-                <td><button type="button" tooltip="true" data-bs-title="Excluir item" class="btn p-0 btn-danger del-action"></button>
+                <td><button type="button" class="btn p-0 btn-danger del-action produtos-excluir"></button>
         `);
 
         $('[format="money"]').mask("#.##0,00", {
@@ -228,6 +228,11 @@
         
         chargeTooltip();
     });
+
+    $(document).on("click", ".produtos-excluir", function(){
+        $(this).parent().parent().remove();
+    });
+
 
     $(document).on("change", ".produtos-id", function(){
         let index = $(".produtos-id").index($(this));
