@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 13-Fev-2023 às 00:56
+-- Tempo de geração: 13-Fev-2023 às 03:41
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.4.1
 
@@ -79,6 +79,7 @@ CREATE TABLE `orders` (
   `supplier_id` int(11) NOT NULL,
   `date_sale` datetime NOT NULL DEFAULT current_timestamp(),
   `observation` text NOT NULL,
+  `value` decimal(10,2) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -129,7 +130,12 @@ CREATE TABLE `users` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `users` (`id`, `name`, `id_collaborator`, `user`, `document`, `pass`, `access`, `token`, `status`) VALUES ('0', 'Teste', '0', 'admin', '999.999.999-99', '2534f8a88242807abc33fbb6fa0ca96dea562b0a', 'A', '', '1');
+--
+-- Extraindo dados da tabela `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `id_collaborator`, `user`, `document`, `pass`, `access`, `token`, `status`) VALUES
+(1, 'Teste', 0, 'admin', '999.999.999-99', '2534f8a88242807abc33fbb6fa0ca96dea562b0a', 'A', '', 1);
 
 --
 -- Índices para tabelas despejadas
@@ -221,7 +227,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
