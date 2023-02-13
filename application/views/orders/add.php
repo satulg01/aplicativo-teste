@@ -29,13 +29,13 @@
     </div>
 </header>
 
-<div class="container">
+<div class="container text-light">
     <h1>Adicionar pedido de compra</h1>
 
     <form action="" id="form-add">
         <div class="mb-3">
             <label for="fornecedor" class="form-label">Fornecedor</label>
-            <select name="supplier_id" id="supplier" class="form-control">
+            <select name="supplier_id" id="supplier" class="form-control bg-secondary text-light">
                 <?php foreach ($this->collaborator->getWhere([["type", "=", 2], ["status", "=", 1]]) as $collaborator) : ?>
 
                     <option value="<?php echo $collaborator["id"]; ?>"><?php echo $collaborator["name"]; ?></option>
@@ -46,12 +46,12 @@
 
         <div class="mb-3">
             <label for="observacao" class="form-label">Observação</label>
-            <textarea class="form-control" id="observacao" name="observation"></textarea>
+            <textarea class="form-control bg-secondary text-light" id="observacao" name="observation"></textarea>
         </div>
 
         <div class="mb-3">
             <label for="status" class="form-label">Status</label>
-            <select name="status" id="status" class="form-control">
+            <select name="status" id="status" class="form-control bg-secondary text-light">
                 <option value="1">Ativo</option>
                 <option value="2">Finalizado</option>
             </select>
@@ -59,8 +59,8 @@
 
         <div class="mb-3">
             <label for="status" class="form-label">Produtos</label>
-            <table class="table">
-                <thead class="table-active">
+            <table class="table text-light">
+                <thead class="table-secondary">
                     <tr>
                         <th width="200">#
                         <th>Nome
@@ -71,11 +71,11 @@
                 </thead>
                 <tbody id="itens">
                     <tr class="produto-linha">
-                        <td><input class="form-control produtos-id" type="text" list="list-produtos-id"/>
-                        <td><input class="form-control produtos-nome" type="text" list="list-produtos-nome"/>
-                        <td><input class="form-control produtos-quantidade" type="text" format="decimal"/>
-                        <td><input class="form-control produtos-valor" type="text" format="money" value="0,00"/>
-                        <td><input class="form-control produtos-valor-total" type="text" format="money" readonly/>
+                        <td><input class="form-control bg-secondary text-light produtos-id" type="text" list="list-produtos-id"/>
+                        <td><input class="form-control bg-secondary text-light produtos-nome" type="text" list="list-produtos-nome"/>
+                        <td><input class="form-control bg-secondary text-light produtos-quantidade" type="text" format="decimal"/>
+                        <td><input class="form-control bg-secondary text-light produtos-valor" type="text" format="money" value="0,00"/>
+                        <td><input class="form-control bg-secondary text-light produtos-valor-total" type="text" format="money" readonly/>
                         <td><button type="button" tooltip="true" data-bs-title="Excluir item" class="btn p-0 btn-danger del-action"></button>
                 </tbody>
 
@@ -156,11 +156,11 @@
     $("#adicionar-item").click(function() {
         $("#itens").append(`
             <tr class="produto-linha">
-                <td><input class="form-control produtos-id" type="text" list="list-produtos-id"/>
-                <td><input class="form-control produtos-nome" type="text" list="list-produtos-nome"/>
-                <td><input class="form-control produtos-quantidade" type="text" format="decimal"/>
-                <td><input class="form-control produtos-valor" type="text" format="money" value="0,00"/>
-                <td><input class="form-control produtos-valor-total" type="text" format="money" readonly/>
+                <td><input class="form-control bg-secondary text-light produtos-id" type="text" list="list-produtos-id"/>
+                <td><input class="form-control bg-secondary text-light produtos-nome" type="text" list="list-produtos-nome"/>
+                <td><input class="form-control bg-secondary text-light produtos-quantidade" type="text" format="decimal"/>
+                <td><input class="form-control bg-secondary text-light produtos-valor" type="text" format="money" value="0,00"/>
+                <td><input class="form-control bg-secondary text-light produtos-valor-total" type="text" format="money" readonly/>
                 <td><button type="button" tooltip="true" data-bs-title="Excluir item" class="btn p-0 btn-danger del-action"></button>
         `);
 

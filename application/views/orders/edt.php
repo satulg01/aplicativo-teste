@@ -23,11 +23,12 @@
             </form>
 
             <div class="text-end">
-                <?php if ($order["status"] == 0 && $user["access"] == "A") : ?>
+            <?php if ($order["status"] == 1 && $user["access"] == "A") : ?>
 
-                <button type="button" id="reativar" class="btn btn-success me-2">Reativar</button>
+            <button type="button" id="deletar" recordset="<?php echo $order["id"]; ?>" class="btn btn-danger me-2">Deletar</button>
 
-                <?php endif ?>
+            <?php endif ?>
+
 
                 <button type="button" href="<?php echo site_url('pedidos'); ?>" class="btn btn-light text-dark me-2">Voltar</button>
             </div>
@@ -45,13 +46,13 @@
 ?>
 
 
-<div class="container">
-    <h1>Editar produto</h1>
+<div class="container text-light">
+    <h1>Editar pedido de compra</h1>
 
     <form action="" id="form-edt">
-    <div class="mb-3">
+        <div class="mb-3">
             <label for="fornecedor" class="form-label">Fornecedor</label>
-            <select name="supplier_id" id="supplier" class="form-control">
+            <select name="supplier_id" id="supplier" class="form-control bg-secondary text-light">
                 <?php foreach ($this->collaborator->getWhere([["type", "=", 2], ["status", "=", 1]]) as $collaborator) : ?>
 
                     <option value="<?php echo $collaborator["id"]; ?>"><?php echo $collaborator["name"]; ?></option>
@@ -62,12 +63,12 @@
 
         <div class="mb-3">
             <label for="observacao" class="form-label">Observação</label>
-            <textarea class="form-control" id="observacao" name="observation"><?php echo $order["observation"]; ?></textarea>
+            <textarea class="form-control bg-secondary text-light" id="observacao" name="observation"><?php echo $order["observation"]; ?></textarea>
         </div>
 
         <div class="mb-3">
             <label for="status" class="form-label">Status</label>
-            <select name="status" id="status" class="form-control">
+            <select name="status" id="status" class="form-control bg-secondary text-light">
                 <option value="1">Ativo</option>
                 <option value="2">Finalizado</option>
             </select>
@@ -75,8 +76,8 @@
 
         <div class="mb-3">
             <label for="status" class="form-label">Produtos</label>
-            <table class="table">
-                <thead class="table-active">
+            <table class="table text-light">
+                <thead class="table-secondary">
                     <tr>
                         <th width="200">#
                         <th>Nome
@@ -88,11 +89,11 @@
                 <tbody id="itens">
                     <?php foreach ($this->order->getItemWhere([["order_id", "=", $order["id"]]]) as $item) : ?>
                         <tr class="produto-linha" recordset="<?php echo $item["id"];?>">
-                            <td><input class="form-control produtos-id" type="text" list="list-produtos-id" value="<?php echo $item["item_id"]; ?>"/>
-                            <td><input class="form-control produtos-nome" type="text" list="list-produtos-nome" value="<?php echo $products[$item["item_id"]]["name"]; ?>"/>
-                            <td><input class="form-control produtos-quantidade" type="text" format="decimal" value="<?php echo number_format($item["quantity"], 2, ",", "."); ?>"/>
-                            <td><input class="form-control produtos-valor" type="text" format="money" value="<?php echo number_format($item["value"], 2, ",", "."); ?>"/>
-                            <td><input class="form-control produtos-valor-total" type="text" format="money" readonly value="<?php echo number_format($item["value_final"], 2, ",", "."); ?>"/>
+                            <td><input class="form-control bg-secondary text-light produtos-id" type="text" list="list-produtos-id" value="<?php echo $item["item_id"]; ?>"/>
+                            <td><input class="form-control bg-secondary text-light produtos-nome" type="text" list="list-produtos-nome" value="<?php echo $products[$item["item_id"]]["name"]; ?>"/>
+                            <td><input class="form-control bg-secondary text-light produtos-quantidade" type="text" format="decimal" value="<?php echo number_format($item["quantity"], 2, ",", "."); ?>"/>
+                            <td><input class="form-control bg-secondary text-light produtos-valor" type="text" format="money" value="<?php echo number_format($item["value"], 2, ",", "."); ?>"/>
+                            <td><input class="form-control bg-secondary text-light produtos-valor-total" type="text" format="money" readonly value="<?php echo number_format($item["value_final"], 2, ",", "."); ?>"/>
                             <td>
                                 <?php if ($order["status"] == 1 && $user["access"] == "A") : ?>
 
@@ -209,11 +210,11 @@
     $("#adicionar-item").click(function() {
         $("#itens").append(`
             <tr class="produto-linha">
-                <td><input class="form-control produtos-id" type="text" list="list-produtos-id"/>
-                <td><input class="form-control produtos-nome" type="text" list="list-produtos-nome"/>
-                <td><input class="form-control produtos-quantidade" type="text" format="decimal"/>
-                <td><input class="form-control produtos-valor" type="text" format="money" value="0,00"/>
-                <td><input class="form-control produtos-valor-total" type="text" format="money" readonly/>
+                <td><input class="form-control bg-secondary text-light produtos-id" type="text" list="list-produtos-id"/>
+                <td><input class="form-control bg-secondary text-light produtos-nome" type="text" list="list-produtos-nome"/>
+                <td><input class="form-control bg-secondary text-light produtos-quantidade" type="text" format="decimal"/>
+                <td><input class="form-control bg-secondary text-light produtos-valor" type="text" format="money" value="0,00"/>
+                <td><input class="form-control bg-secondary text-light produtos-valor-total" type="text" format="money" readonly/>
                 <td><button type="button" tooltip="true" data-bs-title="Excluir item" class="btn p-0 btn-danger del-action"></button>
         `);
 
@@ -282,18 +283,19 @@
 
 
 
-    $("#reativar").click(function() {
+    $("#deletar").click(function() {
         var dados = {
             id: $("#form-id").val()
         }
+
         preloaderIniciar();
 
-        Ajax.send_request("<?php echo site_url('/produtos/reativar') ?>", dados,
+        Ajax.send_request("<?php echo site_url('/pedidos') ?>", dados,
             (resultado) => {
                 alertaSucesso(resultado['mensagem']);
                 
                 setTimeout(() => {
-                    location.href = site_url + "produtos";
+                    location.href = "<?php echo site_url('/pedidos') ?>";
                 }, TIME_UPDATE);
             },
             (error) => {
@@ -305,11 +307,11 @@
 
                     }
                 } else {
-                    alertaErro("Erro ao editar");
+                    alertaErro("Erro ao deletar");
                 }
 
                 console.error(error);
-            }, "progress-bar-excluir", "put")
+            }, "progress-bar-excluir", "DELETE")
 
     });
 </script>

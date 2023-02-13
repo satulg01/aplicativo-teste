@@ -78,6 +78,12 @@ class Orders extends CI_Controller
 			
 			$order["user_id"] = $this->session->logged_user["id"];
 
+			$valorTotal = 0;
+			foreach ($itens as $x => $item) {
+				$valorTotal += $item["quantity"] * $item["value"];
+			}
+			$order["value"] = $valorTotal;
+
 			$id_pedido = $this->order->insert($order);
 
 			foreach ($itens as $x => $item) {
@@ -126,6 +132,12 @@ class Orders extends CI_Controller
 			if($orderOld["status"] != 1) {
 				return $this->output->set_content_type("json")->set_status_header(401)->set_output(json_encode(['mensagem' => 'Pedidos finalizados não podem ser altrerados!', 'status' => '401']));
 			}
+
+			$valorTotal = 0;
+			foreach ($itens as $x => $item) {
+				$valorTotal += $item["quantity"] * $item["value"];
+			}
+			$order["value"] = $valorTotal;
 			
 			$this->order->update($order);
 
@@ -163,29 +175,34 @@ class Orders extends CI_Controller
 		}
 	}
 
-	public function reactivate()
+	public function delete()
 	{
 		verifyPermission();
+
+		$order = $this->input->input_stream();
+		
 		try {
-			verifyAuthToken($this->input->input_stream("token"));
+			verifyAuthToken($order["token"]);
+
+			#Removo para o model não tentar adicionar
+			unset($order["token"]);
+
 		} catch (\Throwable $th) {
 			return $this->output->set_content_type("json")->set_status_header(500)->set_output(json_encode(['mensagem' => 'Token de acesso inválido!', 'status' => '501']));
 		}
 
+
 		try {
-			$order = ["id" => $this->input->input_stream("id"), "status" => 1];
+			$orderOld = $this->order->get($order["id"]);
 
-			$this->order->update($order);
-
-			$userActual = $this->user->getByorder($this->input->input_stream("id"));
-			
-			if(isset($userActual[0])) {
-				$userActual = $userActual[0];
-
-				$this->user->update(["id" => $userActual["id"], "status" => 1]);
+			if($orderOld["status"] != 1) {
+				return $this->output->set_content_type("json")->set_status_header(401)->set_output(json_encode(['mensagem' => 'Pedidos finalizados não podem ser apagados!', 'status' => '401']));
 			}
 
-			return $this->output->set_content_type("json")->set_status_header(200)->set_output(json_encode(['mensagem' => 'Pedido reativado com sucesso!', 'status' => '200']));
+			$this->order->delete(["id", $order["id"]]);
+			$this->order->deleteItemWhere(["order_id", $order["id"]]);
+
+			return $this->output->set_content_type("json")->set_status_header(200)->set_output(json_encode(['mensagem' => 'Pedido deletado com sucesso!', 'status' => '200']));
 		} catch (\Throwable $th) {
 			return $this->output->set_content_type("html")->set_status_header(500)->set_output($th);
 		}

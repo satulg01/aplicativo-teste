@@ -2,18 +2,18 @@
 
 <style>
     span.status-pedido-1 {
-        background: rgb(4, 163, 15);
+        background: #0072B5;
         color: rgb(255, 255, 255);
-        border: 1px solid rgb(4, 131, 12);
+        border: 1px solid #0042b5;
     }
     span.status.status-pedido-1::before {
         content: 'Ativo';
     }
 
     span.status-pedido-2 {
-        background-color: Turquoise;
+        background-color: #04a30f;
         color: white;
-        border: 1px solid Turquoise;
+        border: 1px solid #038c0c;
     }
     span.status.status-pedido-2::before {
         content: 'Finalizado';
@@ -46,13 +46,14 @@
 
 
 <div class="container">
-    <table class="table">
-        <thead class="table-active">
+    <table class="table text-light">
+        <thead class="table-secondary">
             <tr>
                 <th width="200">#
                 <th width="200">Data
                 <th>Fornecedor
-                <th width="160" style="text-align:center;">Status
+                <th width="130" style="text-align:center;">Valor
+                <th width="200" style="text-align:center;">Status
                 <th width="160" style="text-align:center;">Ação
         </thead>
         <tbody>
@@ -70,6 +71,7 @@
                 <td><?php echo $order["id"]; ?>
                 <td><?php echo date("d/m/Y", strtotime($order["date_sale"])); ?>
                 <td><?php echo $collaborators[$order["supplier_id"]]["name"]; ?>
+                <td><span style="float: left">R$</span><span style="float: right"><?php echo number_format($order["value"], 2, ",", "."); ?></span>
                 <td align="center" valign="middle"><span class="status status-pedido-<?php echo $order["status"]; ?>"></span>
                 <td>
 

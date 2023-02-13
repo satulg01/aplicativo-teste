@@ -1,10 +1,17 @@
 <?php $this->load->view('components/html/header'); ?>
 
+<?php
+    $collaboratorType = array(
+        "1" => "Usuário",
+        "2" => "Fornecedor"
+    );
+?>
+
 <style>
     span.status-colaborador-1 {
-        background: rgb(4, 163, 15);
+        background: #0072B5;
         color: rgb(255, 255, 255);
-        border: 1px solid rgb(4, 131, 12);
+        border: 1px solid #0042b5;
     }
     span.status.status-colaborador-1::before {
         content: 'Ativo';
@@ -37,11 +44,12 @@
 
 
 <div class="container">
-    <table class="table">
-        <thead class="table-active">
+    <table class="table text-light">
+        <thead class="table-secondary">
             <tr>
-                <th width="200">#
+                <th width="100">#
                 <th>Nome
+                <th width="15%">Tipo
                 <th width="15%">Cidade
                 <th width="15%">CPF
                 <th width="160" style="text-align:center;">Status
@@ -61,6 +69,7 @@
             <tr>
                 <td><?php echo $collaborator["id"]; ?>
                 <td><?php echo $collaborator["name"]; ?>
+                <td><?php echo $collaboratorType[$collaborator["type"]]; ?>
                 <td><?php echo $collaborator["city"]; ?>
                 <td><?php echo $collaborator["document"]; ?>
                 <td align="center" valign="middle"><span class="status status-colaborador-<?php echo $collaborator["status"]; ?>"></span>

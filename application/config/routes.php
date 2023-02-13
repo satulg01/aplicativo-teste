@@ -16,6 +16,7 @@ $route['pedidos/add']["GET"] = 'Orders/add';
 $route['pedidos/add']["POST"] = 'Orders/insert';
 $route['pedidos/(.+)/editar']["GET"] = 'Orders/edit/$1';
 $route['pedidos/editar']["PUT"] = 'Orders/update';
+$route['pedidos']["DELETE"] = 'Orders/delete';
 
 $route['pedidos_finalizados']["GET"] = 'Orders/finalized/$1';
 

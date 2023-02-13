@@ -19,19 +19,19 @@
     </div>
 </header>
 
-<div class="container">
+<div class="container text-light">
     <h1>Editar colaborador</h1>
 
     <form action="" id="form-edt">
         
         <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="nome" name="name" value="<?php echo $collaborator["name"]; ?>" />
+            <input type="text" class="form-control bg-secondary text-light" id="nome" name="name" value="<?php echo $collaborator["name"]; ?>" />
         </div>
         
         <div class="mb-3">
             <label for="tipo" class="form-label">Tipo</label>
-            <select name="type" id="tipo" class="form-control">
+            <select name="type" id="tipo" class="form-control bg-secondary text-light">
                 <option value="1">Usuário</option>
                 <option value="2">Fornecedor</option>
             </select>
@@ -40,27 +40,27 @@
 
         <div class="mb-3">
             <label for="cpf" class="form-label">CPF</label>
-            <input type="text" class="form-control" id="cpf" format="cpf" name="document" value="<?php echo $collaborator["document"] ?>" />
+            <input type="text" class="form-control bg-secondary text-light" id="cpf" format="cpf" name="document" value="<?php echo $collaborator["document"] ?>" />
         </div>
 
         <div class="mb-3">
             <label for="cep" class="form-label">CEP</label>
-            <input type="text" class="form-control" id="cep" format="cep" name="zip_code" value="<?php echo $collaborator["zip_code"] ?>" />
+            <input type="text" class="form-control bg-secondary text-light" id="cep" format="cep" name="zip_code" value="<?php echo $collaborator["zip_code"] ?>" />
         </div>
 
         <div class="mb-3">
             <label for="cidade" class="form-label">Cidade</label>
-            <input type="text" class="form-control" id="cidade" name="city" value="<?php echo $collaborator["city"] ?>" />
+            <input type="text" class="form-control bg-secondary text-light" id="cidade" name="city" value="<?php echo $collaborator["city"] ?>" />
         </div>
 
         <div class="mb-3">
             <label for="estado" class="form-label">Estado</label>
-            <input type="text" class="form-control" id="estado" name="state" value="<?php echo $collaborator["state"] ?>" />
+            <input type="text" class="form-control bg-secondary text-light" id="estado" name="state" value="<?php echo $collaborator["state"] ?>" />
         </div>
 
         <div class="mb-3">
             <label for="acesso" class="form-label">Acesso</label>
-            <select class="form-control" id="acesso" name="access">
+            <select class="form-control bg-secondary text-light" id="acesso" name="access">
                 <option value="A">Admin</option>
                 <option value="V">Vendedor</option>
             </select>
@@ -68,7 +68,7 @@
 
         <div class="mb-3">
             <label for="status" class="form-label">Status</label>
-            <select name="status" id="status" class="form-control">
+            <select name="status" id="status" class="form-control bg-secondary text-light">
                 <option value="1">Ativo</option>
                 <option value="0">Inativo</option>
             </select>

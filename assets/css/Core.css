@@ -13,7 +13,7 @@ div.modal-glass {
 	z-index: 10001;
 	padding: 20px 40px;
 	min-width: 420px;
-	position: fixed;
+	position: fixed !important;
 	right: 0;
 	top: 10px;
 	border-radius: 4px;

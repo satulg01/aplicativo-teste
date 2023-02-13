@@ -28,9 +28,6 @@ class Order extends CI_Model
 		return $query->result_array();
 	}
 
-	
-
-
 	public function insert($order)
 	{
 		$stringInsert = "";
@@ -46,10 +43,6 @@ class Order extends CI_Model
 		return $this->db->conn_id->insert_id;
 	}
 	
-
-	
-
-
 	public function update($order)
 	{
 		$id = $order["id"];
@@ -69,6 +62,11 @@ class Order extends CI_Model
 
 		return $this->db->query($sql);
 		
+	}
+
+	public function delete($where = [])
+	{
+		return $this->db->query("DELETE FROM `orders` WHERE `$where[0]` = '$where[1]'");
 	}
 
 
@@ -126,6 +124,11 @@ class Order extends CI_Model
 	public function deleteItem($id)
 	{
 		return $this->db->query("DELETE FROM `orders_items` WHERE `orders_items`.`id` = '$id'");
+	}
+
+	public function deleteItemWhere($where = [])
+	{
+		return $this->db->query("DELETE FROM `orders_items` WHERE `$where[0]` = '$where[1]'");
 	}
 
 }

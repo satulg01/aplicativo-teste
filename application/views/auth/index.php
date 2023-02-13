@@ -1,25 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 
 <?php $this->session->unset_userdata("logged_user"); ?>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Satulg</title>
-
-    <link href="<?= base_url('assets/css/') ?>bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    
     <link href="<?= base_url('assets/css/') ?>Core.css" rel="stylesheet" crossorigin="anonymous">
     <link href="<?= base_url('assets/css/') ?>Status.css" rel="stylesheet" crossorigin="anonymous">
     <link href="<?= base_url('assets/') ?>fonts.css" rel="stylesheet" crossorigin="anonymous">
 
-    <script src="<?= base_url('assets/js/') ?>bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="<?= base_url('assets/js/') ?>jquery-3.6.1.min.js" crossorigin="anonymous"></script>
-    <script src="<?= base_url('assets/js/') ?>popper.min.js" crossorigin="anonymous"></script>
-    <script src="<?= base_url('assets/js/') ?>jquery.mask.js" crossorigin="anonymous"></script>
-    <script src="<?= base_url('assets/js/') ?>Core.js" crossorigin="anonymous"></script>
-    <script src="<?= base_url('assets/js/Class/') ?>Ajax.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="<?php echo site_url('/assets') ?>/auth/css/style.css">
+
+    
 
     <script>
         window.onload = () => {
@@ -45,85 +45,58 @@
 
 </head>
 
-    <body class="text-center">
-        <form class="form-signin" id="logar">
-            <img class="mb-4 rounded-circle" src="<?php echo base_url('assets/img/') ?>logo.png" alt="" width="110" height="110">
-            <h1 class="h3 mb-3 font-weight-normal">Login</h1>
-
-            <label for="cpf" class="sr-only mb-1">CPF</label>
-            <input type="text" format="cpf" id="cpf" class="form-control mb-3" placeholder="Digite seu CPF" required="" autofocus="" name="cpf">
-
-            <label for="senha" class="sr-only mb-1">Senha</label>
-            <input type="password" id="senha" class="form-control mb-3" placeholder="Digite sua senha" required="" name="senha">
-
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" value="remember-me" id="remember" checked name="remember"> Mantenha-me Logado
-                </label>
+<body class="img js-fullheight" style="background-image: url(<?php echo site_url('/assets') ?>/auth/images/background.jpg);">
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section">Sistema Teste</h2>
+                </div>
             </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="login-wrap p-0">
+                        <h3 class="mb-4 text-center">Login</h3>
+                        <form action="#" class="signin-form" id="logar">
+                            <div class="form-group">
+                                <input type="text" format="cpf" id="cpf" class="form-control" placeholder="CPF" required="" autofocus="" name="cpf" autocomplete="off">
+                            </div>
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-            
-        </form>
+                            <div class="form-group">
+                                <input id="senha" type="password" class="form-control" placeholder="Senha" required="" name="senha">
+                                <span toggle="#senha" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            </div>
 
-        <style>
-            html,
-            body {
-                height: 100%;
-            }
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary submit px-3">Entrar</button>
+                            </div>
 
-            body {
-                display: -ms-flexbox;
-                display: -webkit-box;
-                display: flex;
-                -ms-flex-align: center;
-                -ms-flex-pack: center;
-                -webkit-box-align: center;
-                align-items: center;
-                -webkit-box-pack: center;
-                justify-content: center;
-                padding-top: 40px;
-                padding-bottom: 40px;
-                background-color: #f5f5f5;
-            }
+                            <div class="form-group d-md-flex">
+                                <div class="w-60">
+                                    <label class="checkbox-wrap checkbox-primary">Mantenha-me Logado
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
 
-            .form-signin {
-                width: 100%;
-                max-width: 330px;
-                padding: 15px;
-                margin: 0 auto;
-            }
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            .form-signin .checkbox {
-                font-weight: 400;
-            }
+    <script src="<?php echo site_url('/assets') ?>/auth/js/jquery.min.js"></script>
 
-            .form-signin .form-control {
-                position: relative;
-                box-sizing: border-box;
-                height: auto;
-                padding: 10px;
-                font-size: 16px;
-            }
+    <script src="<?= base_url('assets/js/') ?>jquery-3.6.1.min.js" crossorigin="anonymous"></script>
+    <script src="<?= base_url('assets/js/') ?>jquery.mask.js" crossorigin="anonymous"></script>
+    <script src="<?= base_url('assets/js/') ?>Core.js" crossorigin="anonymous"></script>
+    <script src="<?= base_url('assets/js/Class/') ?>Ajax.js" crossorigin="anonymous"></script>
 
-            .form-signin .form-control:focus {
-                z-index: 2;
-            }
-
-            .form-signin input[type="email"] {
-                margin-bottom: -1px;
-                border-bottom-right-radius: 0;
-                border-bottom-left-radius: 0;
-            }
-
-            .form-signin input[type="password"] {
-                margin-bottom: 10px;
-                border-top-left-radius: 0;
-                border-top-right-radius: 0;
-            }
-        </style>
-
-    </body>
+    <script src="<?php echo site_url('/assets') ?>/auth/js/popper.js"></script>
+    <script src="<?php echo site_url('/assets') ?>/auth/js/bootstrap.min.js"></script>
+    <script src="<?php echo site_url('/assets') ?>/auth/js/main.js"></script>
 
     <script>
         localStorage.removeItem("token");
@@ -167,5 +140,7 @@
 
         });
     </script>
+
+</body>
 
 </html>

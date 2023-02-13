@@ -13,28 +13,28 @@
     </div>
 </header>
 
-<div class="container">
+<div class="container text-light">
     <h1>Adicionar produto</h1>
 
     <form action="" id="form-add">
         <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="nome" name="name">
+            <input type="text" class="form-control bg-secondary text-light" id="nome" name="name">
         </div>
 
         <div class="mb-3">
             <label for="cpf" class="form-label">Descrição</label>
-            <textarea class="form-control" id="descricao" name="description"></textarea>
+            <textarea class="form-control bg-secondary text-light" id="descricao" name="description"></textarea>
         </div>
 
         <div class="mb-3">
             <label for="cpf" class="form-label">Marca</label>
-            <input type="text" class="form-control" id="marca" name="brand">
+            <input type="text" class="form-control bg-secondary text-light" id="marca" name="brand">
         </div>
 
         <div class="mb-3">
             <label for="status" class="form-label">Status</label>
-            <select name="status" id="status" class="form-control">
+            <select name="status" id="status" class="form-control bg-secondary text-light">
                 <option value="1">Ativo</option>
                 <option value="0">Inativo</option>
             </select>

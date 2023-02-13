@@ -38,7 +38,7 @@ Requires PHP 7.4
 
    - GET /pedidos_finalizados will return all finalized orders
 
-   Insomina Collection: Insomnia-aplicativo-teste.json file in project root
+   Postman Collection: Postman-aplicativo-teste.json file in project root
 
 # System functions
    - Collaborators entered as a supplier don't have access to the system.

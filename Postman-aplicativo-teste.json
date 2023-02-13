@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "4c9a2bcc-c871-444e-b0e2-9ccda1704c1d",
+		"name": "aplicativo-teste",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24367734"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cpf",
+							"value": "999.999.999-99",
+							"type": "text"
+						},
+						{
+							"key": "senha",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pedidos Finalizados",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIxIiwiZG9jdW1lbnQiOiI5OTkuOTk5Ljk5OS05OSIsImFjY2VzcyI6IkEifQ.-26VtTvVbloN_5u4PhxQj9hIWwq_D37XLD4XHAyyaTA",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/pedidos_finalizados",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"pedidos_finalizados"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

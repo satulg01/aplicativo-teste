@@ -2,9 +2,9 @@
 
 <style>
     span.status-produto-1 {
-        background: rgb(4, 163, 15);
+        background: #0072B5;
         color: rgb(255, 255, 255);
-        border: 1px solid rgb(4, 131, 12);
+        border: 1px solid #0042b5;
     }
     span.status.status-produto-1::before {
         content: 'Ativo';
@@ -37,8 +37,8 @@
 
 
 <div class="container">
-    <table class="table">
-        <thead class="table-active">
+    <table class="table text-light">
+        <thead class="table-secondary">
             <tr>
                 <th width="200">#
                 <th>Nome
