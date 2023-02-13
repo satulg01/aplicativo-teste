@@ -1,3 +1,4 @@
+<?php $this->load->view('components/html/header'); ?>
 
 <style>
     span.status-pedido-1 {
