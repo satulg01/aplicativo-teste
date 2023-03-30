@@ -21,8 +21,13 @@ class Collaborators extends CI_Controller
 			redirect("/");
 		}
 
+		$this->load->library('form_validation');
 		$this->load->model("collaborator");
 		$this->load->model("user");
+	}
+	
+	public function __destruct() {
+		$this->db->close();
 	}
 
 	public function index()
@@ -60,17 +65,26 @@ class Collaborators extends CI_Controller
 	{
 		$collaborator = $this->input->post();
 
-		try {
-			verifyAuthToken($collaborator["token"]);
-			unset($collaborator["token"]);
-		} catch (\Throwable $th) {
-			return $this->output->set_content_type("json")->set_status_header(500)->set_output(json_encode(['mensagem' => 'Token de acesso inválido!', 'status' => '501']));
+		print_r($collaborator);
+		exit;
+
+		$config = array(
+                array(
+                    'field' => 'txtCodigo',
+                    'label' => 'Código',
+                    'rules' => 'trim|required|integer|max_length[10]'
+                ),
+			);
+
+		$this->form_validation->set_rules($config);
+
+		if($this->form_validation->run() == FALSE) {
+
+		} else {
+
 		}
 
-		try {
-			$camposWhere = array(
-				["document", "=", $collaborator["document"]]
-			);
+
 
 			if($this->collaborator->getWhere($camposWhere)) {
 				return $this->output->set_content_type("json")->set_status_header(401)->set_output(json_encode(['mensagem' => 'CPF já cadastrado na nossa base de dados!', 'status' => '401']));
@@ -95,12 +109,10 @@ class Collaborators extends CI_Controller
 				"id_collaborator" => $id_colaborador,
 				"status" => $collaborator["status"],
 			);
+
 			$this->user->insert($user);
 
 			return $this->output->set_content_type("json")->set_status_header(200)->set_output(json_encode(['mensagem' => 'Colaborador inserido com sucesso!', 'status' => '200']));
-		} catch (\Throwable $th) {
-			return $this->output->set_content_type("json")->set_status_header(500)->set_output(json_encode(['mensagem' => 'Erro ao inserir!', 'status' => '500']));
-		}
 	}
 
 

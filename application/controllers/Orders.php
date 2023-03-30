@@ -21,6 +21,10 @@ class Orders extends CI_Controller
 		$this->load->model("user");
 	}
 
+	public function __destruct() {
+		$this->db->close();
+	}
+
 	public function index()
 	{	
 		$this->data["orders"] = $this->order->getAll(["date_sale", "desc"]);

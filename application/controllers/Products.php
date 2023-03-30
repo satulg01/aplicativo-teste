@@ -21,6 +21,10 @@ class Products extends CI_Controller
 			redirect("/");
 		}
 	}
+
+	public function __destruct() {
+		$this->db->close();
+	}
 	
 
 	public function index()

@@ -18,6 +18,10 @@ class Main extends CI_Controller {
         }
 	}
 	
+	public function __destruct() {
+		$this->db->close();
+	}
+	
 	public function index()
 	{
 		$this->load->view('home/index');

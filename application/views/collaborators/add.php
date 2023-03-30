@@ -16,7 +16,7 @@
 <div class="container text-light">
     <h1>Adicionar colaborador</h1>
 
-    <form action="" id="form-add">
+    <?php echo form_open('colaboradores/adicionar'); ?>
         <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>
             <input type="text" class="form-control bg-secondary text-light" id="nome" name="name">
@@ -65,7 +65,7 @@
                 <option value="0">Inativo</option>
             </select>
         </div>
-    </form>
+    <?php echo form_close(); ?>
 
     <button type="button" class="btn btn-success" id="salvar">Salvar</button>
 </div>

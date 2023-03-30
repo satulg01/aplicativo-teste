@@ -57,13 +57,14 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="login-wrap p-0">
                         <h3 class="mb-4 text-center">Login</h3>
-                        <form action="#" class="signin-form" id="logar">
+                        <?php $attributes = array('class' => 'signin-form', 'id' => 'logar', 'name' => 'formLogin'); ?>
+                        <?php echo form_open('login', $attributes); ?>
                             <div class="form-group">
-                                <input type="text" format="cpf" id="cpf" class="form-control" placeholder="CPF" required="" autofocus="" name="cpf" autocomplete="off">
+                                <input type="text" format="cpf" id="cpf" class="form-control" placeholder="CPF" required="" autofocus="" name="txtCpf" autocomplete="off">
                             </div>
 
                             <div class="form-group">
-                                <input id="senha" type="password" class="form-control" placeholder="Senha" required="" name="senha">
+                                <input id="senha" type="password" class="form-control" placeholder="Senha" required="" name="txtSenha">
                                 <span toggle="#senha" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                             </div>
 
@@ -80,7 +81,7 @@
                                 </div>
                             </div>
 
-                        </form>
+                        <?php echo form_close(); ?>
                     </div>
                 </div>
             </div>
@@ -97,50 +98,6 @@
     <script src="<?php echo site_url('/assets') ?>/auth/js/popper.js"></script>
     <script src="<?php echo site_url('/assets') ?>/auth/js/bootstrap.min.js"></script>
     <script src="<?php echo site_url('/assets') ?>/auth/js/main.js"></script>
-
-    <script>
-        localStorage.removeItem("token");
-
-        $("#logar").submit(function(e) {
-            e.preventDefault();
-
-            const dados = $("#logar").serializeArray();
-            dados["remember"] = $("#remember").is(":checked");
-            console.log(dados);
-
-            Ajax.send_request("<?php echo site_url('/login') ?>", dados,
-            (resultado) => {
-                preloaderParar();
-                console.log(resultado);
-                alertaSucesso(resultado['mensagem']);
-
-                if(typeof resultado["token"] != "undefined") {
-                    Ajax.set_token(resultado["token"]);
-                }
-                
-                setTimeout(() => {
-                    location.href = '<?php echo site_url('/') ?>';
-                }, 1000);
-            },
-            (error) => {
-                preloaderParar();
-                console.log(error);
-
-                if(typeof error["responseJSON"] != "undefined") {
-                    if(typeof error["responseJSON"]["mensagem"] != "undefined") {
-                        alertaErro(error["responseJSON"]["mensagem"]);
-
-                    }
-                } else {
-                    alertaErro("Erro ao editar");
-                }
-
-                console.error(error);
-            }, "progress-bar-excluir", "POST")
-
-        });
-    </script>
-
 </body>
 
 </html>

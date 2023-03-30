@@ -8,4 +8,8 @@ class Users extends CI_Controller {
 		$this->load->model("user");
 		print_r($this->user->getAll());
 	}
+
+	public function __destruct() {
+		$this->db->close();
+	}
 }
