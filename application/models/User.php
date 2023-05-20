@@ -4,14 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class User extends CI_Model {
 	public $blockTime = 10;
 
-	public function login()
+	public function login($usuario, $senha)
 	{
-        $pass = sha1($this->input->post('txtSenha') . $_ENV['SECRET_KEY']);
+        $pass = sha1($senha . $_ENV['SECRET_KEY']);
 
         $this->db->select('id, name, id_collaborator, id_collaborator, document, pass, access, token, status');
         $this->db->from('users');
         $this->db->where('pass', $pass);
-        $this->db->where('document', $this->input->post('txtCpf'));
+        $this->db->where('document', $usuario);
 	
 		$query = $this->db->get();
         return $query->result_array();
@@ -19,13 +19,10 @@ class User extends CI_Model {
 
 	public function insert_ip_attemp($ip)
 	{
-		$dados = array(
-			"ip" => $ip,
-			"user" => $this->input->post('txtCpf'),
-			"pass" => $this->input->post('txtSenha')
-		);
-	
-		return $this->db->insert('login_attemps', $dados);
+		$this->db->set('ip', $ip);
+		$this->db->set('user', $ip);
+		$this->db->set('pass', $ip);
+		return $this->db->insert('login_attemps');
 	}
 
 	public function get_ip_attemps($ip)

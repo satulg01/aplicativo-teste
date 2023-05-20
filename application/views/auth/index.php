@@ -57,15 +57,24 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="login-wrap p-0">
                         <h3 class="mb-4 text-center">Login</h3>
+                        
+                        <?php if(isset($validation_errors)): ?>
+                            <div class="alert alert-danger" role="alert">
+                                <?php echo $validation_errors; ?>
+                            </div>
+                        <?php endif ?>
+
                         <?php $attributes = array('class' => 'signin-form', 'id' => 'logar', 'name' => 'formLogin'); ?>
                         <?php echo form_open('login', $attributes); ?>
                             <div class="form-group">
-                                <input type="text" format="cpf" id="cpf" class="form-control" placeholder="CPF" required="" autofocus="" name="txtCpf" autocomplete="off">
+                                <input type="text" format="cpf" id="cpf" class="form-control" value="<?php echo set_value('txtCpf'); ?>" placeholder="CPF" required="" autofocus="" name="txtCpf" autocomplete="off">
+                                <?php echo form_error('txtCpf'); ?>
                             </div>
 
                             <div class="form-group">
-                                <input id="senha" type="password" class="form-control" placeholder="Senha" required="" name="txtSenha">
+                                <input id="senha" type="password" class="form-control" value="<?php echo set_value('txtSenha'); ?>" placeholder="Senha" required="" name="txtSenha">
                                 <span toggle="#senha" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                <?php echo form_error('txtSenha'); ?>
                             </div>
 
                             <div class="form-group">

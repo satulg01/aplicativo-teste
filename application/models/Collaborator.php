@@ -4,10 +4,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Collaborator extends CI_Model
 {
 
-	public function get($id)
+	public function get($id = 0, $orderBy = [])
 	{
-		$query = $this->db->query("SELECT `collaborators`.* FROM `collaborators` WHERE `collaborators`.`id` = '$id'");
-		return $query->result_array()[0];
+		$this->db->reconnect();
+
+		if(empty($id)) {
+			$query = $this->db->get('collaborators');
+		} 
+		else 
+		{
+			$this->db->limit(1);
+			$query = $this->db->get_where('collaborators', array('id' => $id));
+		}
+
+		if(!empty($orderBy)) {
+			$this->db->order_by($orderBy["campo"], $orderBy["ordem"]);
+		}
+
+
+		return $query->result_array();
 	}
 
 	public function getAll($orderBy = [])

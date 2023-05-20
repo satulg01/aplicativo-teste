@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Main extends CI_Controller {
 
+    private $data = array();
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -12,10 +14,12 @@ class Main extends CI_Controller {
 		$userLoggedFromDB = $this->user->getWhere(["id", $loggedUser["id"]])[0];
 
         if(!$loggedUser) {
-            redirect("login");
+            return redirect("login");
         } else if($userLoggedFromDB["status"] != 1) {
-            redirect("login");
+            return redirect("login");
         }
+
+		$this->data["user"] = $userLoggedFromDB;
 	}
 	
 	public function __destruct() {
@@ -24,6 +28,6 @@ class Main extends CI_Controller {
 	
 	public function index()
 	{
-		$this->load->view('home/index');
+		$this->load->view('home/index', $this->data);
 	}
 }
