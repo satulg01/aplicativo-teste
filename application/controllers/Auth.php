@@ -9,6 +9,7 @@ class Auth extends CI_Controller
         parent::__construct();
         $this->load->model("user");
         $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="invalid-feedback">', '</div>');
     }
 
     public function __destruct()
@@ -78,21 +79,19 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules($config);
 
         if ($this->form_validation->run() == FALSE) {
-            $campos = $this->input->post();
-            echo form_error('field name', '<div class="error">', '</div>');
-            print_r($campos);
-            echo validation_errors();
+            return $this->load->view("auth/index");
 
         } else {
-            $resultado = $this->user->login();
+            $resultado = $this->user->login($this->input->post('txtCpf'), $this->input->post('txtSenha'));
 
             if(!empty($resultado)) {
-                $this->session->set_userdata("logged_user", $resultado);
+                $this->session->set_userdata("logged_user", $resultado[0]);
+                return redirect("/");
             } else {
-                $this->user->insert_ip_attemp($this->getClientIp());
+                $this->load->view("auth/index", array('validation_errors' => "Usuário e/ou senha inválidos!"));
+                return $this->user->insert_ip_attemp($this->getClientIp());
             }
         }
-        exit;
 
         
 
@@ -106,32 +105,32 @@ class Auth extends CI_Controller
         #}
 
 
-        $pass = sha1($campos["senha"] . $_ENV['SECRET_KEY']);
+        // $pass = sha1($campos["senha"] . $_ENV['SECRET_KEY']);
 
 
-        if (isset($resultado[0])) {
-            $user = $resultado[0];
+        // if (isset($resultado[0])) {
+        //     $user = $resultado[0];
 
-            if ($user["status"] != 1) {
-                return $this->output->set_content_type("json")->set_status_header(404)->set_output(json_encode(['mensagem' => 'Seu acesso está inativo!', 'status' => '404']));
-            }
+        //     if ($user["status"] != 1) {
+        //         return $this->output->set_content_type("json")->set_status_header(404)->set_output(json_encode(['mensagem' => 'Seu acesso está inativo!', 'status' => '404']));
+        //     }
 
-            $dados = array(
-                "userId" => $user["id"],
-                "document" => $user["document"],
-                "access" => $user["access"]
-            );
+        //     $dados = array(
+        //         "userId" => $user["id"],
+        //         "document" => $user["document"],
+        //         "access" => $user["access"]
+        //     );
 
-            $token = $this->token($dados);
-            $this->session->set_userdata("logged_user", $user);
+        //     $token = $this->token($dados);
+        //     $this->session->set_userdata("logged_user", $user);
 
-            return $this->output->set_content_type("json")->set_status_header(200)->set_output(json_encode(['mensagem' => 'Logado com sucesso!', 'status' => '200', 'token' => $token]));
-        } else {
+        //     return $this->output->set_content_type("json")->set_status_header(200)->set_output(json_encode(['mensagem' => 'Logado com sucesso!', 'status' => '200', 'token' => $token]));
+        // } else {
             
-            $this->verifyDdos();
+        //     $this->verifyDdos();
 
-            return $this->output->set_content_type("json")->set_status_header(404)->set_output(json_encode(['mensagem' => 'Usuário e senha não conferem!', 'status' => '404']));
-        }
+        //     return $this->output->set_content_type("json")->set_status_header(404)->set_output(json_encode(['mensagem' => 'Usuário e senha não conferem!', 'status' => '404']));
+        // }
     }
 
     public function logout()
