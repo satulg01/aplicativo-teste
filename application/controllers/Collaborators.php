@@ -8,6 +8,8 @@ class Collaborators extends CI_Controller
 		'comeback' => 'colaboradores'
 	);
 
+	private $config_validator;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -22,8 +24,53 @@ class Collaborators extends CI_Controller
 		}
 
 		$this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="invalid-feedback d-block">', '</div>');
+
 		$this->load->model("collaborator");
 		$this->load->model("user");
+
+		$this->config_validator = array(
+            array(
+                'field' => 'txtDocument',
+                'label' => 'CPF',
+                'rules' => 'trim|required|is_unique[collaborators.document]'
+            ),
+			array(
+                'field' => 'txtName',
+                'label' => 'Nome',
+                'rules' => 'trim|required|min_length[10]'
+            ),
+            array(
+                'field' => 'txtType',
+                'label' => 'Tipo',
+                'rules' => 'trim|required|is_natural_no_zero|in_list[1,2]',
+            ),
+			array(
+                'field' => 'txtZipcode',
+                'label' => 'Cep',
+                'rules' => 'trim|max_length[10]',
+            ),
+			array(
+                'field' => 'txtCity',
+                'label' => 'Cidade',
+                'rules' => 'trim',
+            ),
+			array(
+                'field' => 'txtState',
+                'label' => 'Estado',
+                'rules' => 'trim',
+            ),
+			array(
+                'field' => 'txtAccess',
+                'label' => 'Acesso',
+                'rules' => 'trim|required|alpha_numeric|max_length[1]',
+            ),
+			array(
+                'field' => 'txtStatus',
+                'label' => 'Status',
+                'rules' => 'trim|required|is_natural',
+            ),
+        );
 	}
 	
 	public function __destruct() {
@@ -34,14 +81,10 @@ class Collaborators extends CI_Controller
 	{
 
 		//Jogo no meu array principal  todos os colaboradores
-		$this->data["collaborators"] = $this->collaborator->getAll(["name", "asc"]);
+		$this->data["collaborators"] = $this->collaborator->get();
 
 		//Carrego a view
-		$page = $this->load->view('collaborators/index', $this->data, TRUE);
-
-		//Exemplo de retorno de JSON
-		//$this->output->set_content_type("json")->set_status_header(200)->set_output(json_encode($this->recebimento->getAll()));
-		$this->output->set_content_type("html")->set_status_header(200)->set_output($page);
+		$this->load->view('collaborators/index', $this->data);
 	}
 
 	public function add()
@@ -54,65 +97,54 @@ class Collaborators extends CI_Controller
 
 	public function edit($id)
 	{
-		$this->data["collaborator"] = $this->collaborator->get($id);
+		$this->data["collaborator"] = $this->collaborator->get($id)[0];
 
-		$page = $this->load->view("collaborators/edt", $this->data, TRUE);
-
-		$this->output->set_content_type("html")->set_status_header(200)->set_output($page);
+		$this->load->view("collaborators/edt", $this->data);
 	}
 
 	public function insert()
 	{
-		$collaborator = $this->input->post();
+		
 
-		print_r($collaborator);
-		exit;
+        $this->form_validation->set_rules($this->config_validator);
 
-		$config = array(
-                array(
-                    'field' => 'txtCodigo',
-                    'label' => 'Código',
-                    'rules' => 'trim|required|integer|max_length[10]'
-                ),
-			);
+        if ($this->form_validation->run() == FALSE) {
+			$this->load->view("collaborators/add", $this->data);
 
-		$this->form_validation->set_rules($config);
-
-		if($this->form_validation->run() == FALSE) {
-
-		} else {
-
-		}
+        } else {
+            $this->session->set_flashdata("success", "Colaborador inserido com sucesso!");
+			redirect("/colaboradores");
+        }
 
 
 
-			if($this->collaborator->getWhere($camposWhere)) {
-				return $this->output->set_content_type("json")->set_status_header(401)->set_output(json_encode(['mensagem' => 'CPF já cadastrado na nossa base de dados!', 'status' => '401']));
-			}
+			// if($this->collaborator->getWhere($camposWhere)) {
+			// 	return $this->output->set_content_type("json")->set_status_header(401)->set_output(json_encode(['mensagem' => 'CPF já cadastrado na nossa base de dados!', 'status' => '401']));
+			// }
 
-			$id_colaborador = $this->collaborator->insert($collaborator);
+			// $id_colaborador = $this->collaborator->insert($collaborator);
 
 
-			$pedacosNome = explode(" ", $collaborator["name"]);
-			$usuario = $pedacosNome[0];
+			// $pedacosNome = explode(" ", $collaborator["name"]);
+			// $usuario = $pedacosNome[0];
 			
-			if($collaborator["type"] == 2) {
-				$collaborator["status"] = 0;
-			}
+			// if($collaborator["type"] == 2) {
+			// 	$collaborator["status"] = 0;
+			// }
 
-			$user = array(
-				"name" => $collaborator["name"],
-				"document" => $collaborator["document"],
-				"user" => $usuario,
-				"pass" => sha1("123" . $_ENV['SECRET_KEY']),
-				"access" => $collaborator["access"],
-				"id_collaborator" => $id_colaborador,
-				"status" => $collaborator["status"],
-			);
+			// $user = array(
+			// 	"name" => $collaborator["name"],
+			// 	"document" => $collaborator["document"],
+			// 	"user" => $usuario,
+			// 	"pass" => sha1("123" . $_ENV['SECRET_KEY']),
+			// 	"access" => $collaborator["access"],
+			// 	"id_collaborator" => $id_colaborador,
+			// 	"status" => $collaborator["status"],
+			// );
 
-			$this->user->insert($user);
+			// $this->user->insert($user);
 
-			return $this->output->set_content_type("json")->set_status_header(200)->set_output(json_encode(['mensagem' => 'Colaborador inserido com sucesso!', 'status' => '200']));
+			// return $this->output->set_content_type("json")->set_status_header(200)->set_output(json_encode(['mensagem' => 'Colaborador inserido com sucesso!', 'status' => '200']));
 	}
 
 
